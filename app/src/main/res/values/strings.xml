@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">IAcccess</string>
+
+    //Botones
+    <string name="btnRegistrar">Registrarse</string>
+    <string name="btnLogin">Ingresar</string>
+    <string name="btnIniciarSesion">Iniciar Sesion</string>
+
+    //Labels
+    <string name="labelNombre">Nombre</string>
+    <string name="labelApellido">Apellido</string>
+    <string name="labelCorreo">Correo</string>
+    <string name="labelCelular">Celular</string>
+    <string name="labelContrasenia">Contraseña</string>
+
+    //CheckBox
+    <string name="cbContrasenia">Ver Contraseña</string>
+</resources>
