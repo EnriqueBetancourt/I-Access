@@ -4,15 +4,29 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
+import com.example.iacccess.R;
 import com.example.iacccess.databinding.FragmentHomeBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class HomeFragment extends Fragment {
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
+    Button btnProcesarVisita;
 
     private FragmentHomeBinding binding;
 
@@ -26,6 +40,7 @@ public class HomeFragment extends Fragment {
 
         //final TextView textView = binding.textHome;
         //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
         return root;
     }
 
@@ -34,4 +49,62 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Referencias a tus vistas
+        TextView nombreTextView = view.findViewById(R.id.labelNombre);
+        ImageView fotoImageView = view.findViewById(R.id.imgPerfil);
+        btnProcesarVisita = view.findViewById(R.id.btnProcesarVista);
+
+        // Obtener el usuario actual
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+
+            // Consultar Firestore
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference userRef = db.collection("usuarios").document(userId);
+
+            userRef.get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            // Obtener los datos
+                            String nombre = documentSnapshot.getString("nombre");
+                            String apellido = documentSnapshot.getString("apellido");
+                            String fotoUrl = documentSnapshot.getString("fotoPerfil");
+                            String curp = documentSnapshot.getString("curp");
+                            String fotoIne = documentSnapshot.getString("fotoIne");
+
+                            // Actualizar vistas
+                            if (nombre != null) {
+                                nombreTextView.setText(nombre + " " + apellido);
+                            }
+
+                            if (fotoUrl != null) {
+                                Glide.with(requireContext())
+                                        .load(fotoUrl)
+                                        .into(fotoImageView);
+                            }
+
+                            if ((curp == null || curp.isEmpty()) && (fotoIne == null || fotoIne.isEmpty())){
+                                btnProcesarVisita.setEnabled(false);
+                            }  else {
+                                btnProcesarVisita.setEnabled(true);
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "No se encontraron datos del usuario.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(getContext(), "Error al cargar datos del usuario.", Toast.LENGTH_SHORT).show();
+                    });
+        } else {
+            Toast.makeText(getContext(), "Usuario no autenticado.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
