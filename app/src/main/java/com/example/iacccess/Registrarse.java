@@ -89,7 +89,7 @@ public class Registrarse extends AppCompatActivity {
                                     userInfo.put("celular", celular);
                                     userInfo.put("correo", correo);
                                     userInfo.put("curp", null);
-                                    userInfo.put("fotoIne", null);
+                                    userInfo.put("fotoINE", null);
                                     userInfo.put("fotoPerfil", fotoDefecto);
 
                                     // Generar QR con el userId

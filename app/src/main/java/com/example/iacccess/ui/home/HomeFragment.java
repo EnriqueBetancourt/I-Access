@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.example.iacccess.R;
@@ -26,7 +28,7 @@ import com.google.firebase.storage.FirebaseStorage;
 public class HomeFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
-    Button btnProcesarVisita;
+    Button btnProcesarVisita, btnCompletarPerfil;
 
     private FragmentHomeBinding binding;
 
@@ -57,6 +59,8 @@ public class HomeFragment extends Fragment {
         TextView nombreTextView = view.findViewById(R.id.labelNombre);
         ImageView fotoImageView = view.findViewById(R.id.imgPerfil);
         btnProcesarVisita = view.findViewById(R.id.btnProcesarVista);
+        btnCompletarPerfil = view.findViewById(R.id.btnCompletarPerfil);
+        final NavController navController = Navigation.findNavController(view);
 
         // Obtener el usuario actual
         mAuth = FirebaseAuth.getInstance();
@@ -105,6 +109,13 @@ public class HomeFragment extends Fragment {
         } else {
             Toast.makeText(getContext(), "Usuario no autenticado.", Toast.LENGTH_SHORT).show();
         }
+
+        btnCompletarPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.completarPerfil);
+            }
+        });
     }
 
 }
