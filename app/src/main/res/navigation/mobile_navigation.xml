@@ -15,11 +15,48 @@
         android:id="@+id/nav_gallery"
         android:name="com.example.iacccess.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_nav_gallery_to_menuPortero2"
+            app:destination="@id/menuPortero2" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.iacccess.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/menuPortero2"
+        android:name="com.example.iacccess.menuPortero"
+        android:label="fragment_menu_portero"
+        tools:layout="@layout/fragment_menu_portero" >
+        <action
+            android:id="@+id/action_menuPortero2_to_nav_gallery"
+            app:destination="@id/nav_gallery" />
+        <action
+            android:id="@+id/action_menuPortero2_to_registrarAcceso"
+            app:destination="@id/registrarAcceso" />
+        <action
+            android:id="@+id/action_menuPortero2_to_monitorearVisitantes"
+            app:destination="@id/monitorearVisitantes" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrarAcceso"
+        android:name="com.example.iacccess.registrarAcceso"
+        android:label="fragment_registrar_acceso"
+        tools:layout="@layout/fragment_registrar_acceso" >
+        <action
+            android:id="@+id/action_registrarAcceso_to_menuPortero2"
+            app:destination="@id/menuPortero2" />
+    </fragment>
+    <fragment
+        android:id="@+id/monitorearVisitantes"
+        android:name="com.example.iacccess.monitorearVisitantes"
+        android:label="fragment_monitorear_visitantes"
+        tools:layout="@layout/fragment_monitorear_visitantes" >
+        <action
+            android:id="@+id/action_monitorearVisitantes_to_menuPortero2"
+            app:destination="@id/menuPortero2" />
+    </fragment>
 </navigation>
