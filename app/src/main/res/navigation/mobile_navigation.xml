@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_completarPerfil"
             app:destination="@id/completarPerfil" />
+        <action
+            android:id="@+id/action_nav_home_to_procesarVIsita"
+            app:destination="@id/procesarVIsita" />
     </fragment>
 
     <fragment
@@ -41,12 +44,12 @@
     </fragment>
     <fragment
         android:id="@+id/historialVisitasVisitante"
-        android:name="com.example.iacccess.historialVisitasVisitante"
+        android:name="com.example.iacccess.HistorialVisitasVisitante"
         android:label="fragment_historial_visitas_visitante"
         tools:layout="@layout/fragment_historial_visitas_visitante" />
     <fragment
         android:id="@+id/menuPortero2"
-        android:name="com.example.iacccess.menuPortero"
+        android:name="com.example.iacccess.MenuPortero"
         android:label="fragment_menu_portero"
         tools:layout="@layout/fragment_menu_portero" >
         <action
@@ -61,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrarAcceso"
-        android:name="com.example.iacccess.registrarAcceso"
+        android:name="com.example.iacccess.RegistrarAcceso"
         android:label="fragment_registrar_acceso"
         tools:layout="@layout/fragment_registrar_acceso" >
         <action
@@ -70,11 +73,25 @@
     </fragment>
     <fragment
         android:id="@+id/monitorearVisitantes"
-        android:name="com.example.iacccess.monitorearVisitantes"
+        android:name="com.example.iacccess.MonitorearVisitantes"
         android:label="fragment_monitorear_visitantes"
         tools:layout="@layout/fragment_monitorear_visitantes" >
         <action
             android:id="@+id/action_monitorearVisitantes_to_menuPortero2"
             app:destination="@id/menuPortero2" />
     </fragment>
+    <fragment
+        android:id="@+id/procesarVIsita"
+        android:name="com.example.iacccess.ProcesarVisita"
+        android:label="fragment_procesar_v_isita"
+        tools:layout="@layout/fragment_procesar_visita" >
+        <action
+            android:id="@+id/action_procesarVIsita_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/escanearQr"
+        android:name="com.example.iacccess.escanearQr"
+        android:label="fragment_escanear_qr"
+        tools:layout="@layout/fragment_escanear_qr" />
 </navigation>

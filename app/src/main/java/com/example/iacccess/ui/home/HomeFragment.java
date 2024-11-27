@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
 
 public class HomeFragment extends Fragment {
     FirebaseAuth mAuth;
@@ -57,7 +56,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // Referencias a tus vistas
         TextView nombreTextView = view.findViewById(R.id.labelNombre);
-        ImageView fotoImageView = view.findViewById(R.id.imgPerfil);
+        ImageView fotoImageView = view.findViewById(R.id.imgAccesoQR);
         btnProcesarVisita = view.findViewById(R.id.btnProcesarVista);
         btnCompletarPerfil = view.findViewById(R.id.btnCompletarPerfil);
         final NavController navController = Navigation.findNavController(view);
@@ -114,6 +113,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.completarPerfil);
+            }
+        });
+
+        btnProcesarVisita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.procesarVIsita);
             }
         });
     }

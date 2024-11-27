@@ -160,7 +160,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/imgPerfil"
+            android:id="@+id/imgAccesoQR"
             android:layout_width="117dp"
             android:layout_height="105dp"
             app:layout_constraintBottom_toTopOf="@+id/labelNombre"

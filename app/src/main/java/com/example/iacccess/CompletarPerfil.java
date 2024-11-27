@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -107,8 +107,9 @@ public class CompletarPerfil extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         btnCambiarFoto = view.findViewById(R.id.btnCambiarFoto);
-        fotoImageView = view.findViewById(R.id.imgPerfil);
+        fotoImageView = view.findViewById(R.id.imgAccesoQR);
 
         btnSeleccionarIne = view.findViewById(R.id.btnSubirImagen);
         btnCompletarPerfil = view.findViewById(R.id.btnCompletarPerfil);
@@ -126,38 +127,45 @@ public class CompletarPerfil extends Fragment {
                 }
         );
 
-        // Evento para seleccionar imagen
+        // Firebase Auth y Firestore
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
             String userId = currentUser.getUid();
-
-            // Consultar Firestore
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             DocumentReference userRef = db.collection("usuarios").document(userId);
 
             userRef.get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
-                            // Obtener los datos
+                            // Obtener datos del usuario
                             String fotoUrl = documentSnapshot.getString("fotoPerfil");
                             String curp = documentSnapshot.getString("curp");
 
+                            // Mostrar foto de perfil si existe
                             if (fotoUrl != null) {
                                 Glide.with(requireContext())
                                         .load(fotoUrl)
                                         .into(fotoImageView);
                             }
-                            if (curp != null || curp.isEmpty()) {
+
+                            // Mostrar CURP si existe
+                            if (curp != null && !curp.isEmpty()) {
                                 txtCurp.setText(curp);
+                            } else {
+                                txtCurp.setText(""); // Mostrar vacío si no hay CURP
+                                Log.e("CompletarPerfil", "CURP no encontrada.");
                             }
                         } else {
-                            Toast.makeText(getContext(), "No se encontraron datos del usuario.", Toast.LENGTH_SHORT).show();
+                            // Documento no encontrado, inicializar datos
+                            Log.e("CompletarPerfil", "Documento del usuario no existe.");
+                            inicializarDatosUsuario(userId, userRef);
                         }
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(getContext(), "Error al cargar datos del usuario.", Toast.LENGTH_SHORT).show();
+                        Log.e("CompletarPerfil", "Error al obtener el documento", e);
                     });
         } else {
             Toast.makeText(getContext(), "Usuario no autenticado.", Toast.LENGTH_SHORT).show();
@@ -178,6 +186,25 @@ public class CompletarPerfil extends Fragment {
         // Evento para completar el perfil
         btnCompletarPerfil.setOnClickListener(v -> guardarInformacion());
     }
+
+    /**
+     * Inicializa un documento vacío en Firestore para nuevos usuarios
+     */
+    private void inicializarDatosUsuario(String userId, DocumentReference userRef) {
+        Map<String, Object> defaultData = new HashMap<>();
+        defaultData.put("fotoPerfil", null);
+        defaultData.put("curp", "");
+
+        userRef.set(defaultData)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Usuario inicializado correctamente.", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error al inicializar datos del usuario.", Toast.LENGTH_SHORT).show();
+                    Log.e("CompletarPerfil", "Error al inicializar documento", e);
+                });
+    }
+
 
     private void abrirGaleria() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.497">
 
         <ImageView
-            android:id="@+id/imgPerfil"
+            android:id="@+id/imgAccesoQR"
             android:layout_width="117dp"
             android:layout_height="117dp"
             android:layout_marginEnd="92dp"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="92dp"
             android:text="Completar Perfil"
-            app:layout_constraintBottom_toTopOf="@+id/imgPerfil"
+            app:layout_constraintBottom_toTopOf="@+id/imgAccesoQR"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.47" />
