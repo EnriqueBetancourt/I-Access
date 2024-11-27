@@ -77,4 +77,19 @@
             android:id="@+id/action_monitorearVisitantes_to_menuPortero2"
             app:destination="@id/menuPortero2" />
     </fragment>
+    <fragment
+        android:id="@+id/menu_residente"
+        android:name="com.example.iacccess.menu_residente"
+        android:label="fragment_menu_residente"
+        tools:layout="@layout/fragment_menu_residente" />
+    <fragment
+        android:id="@+id/solicitar_acceso"
+        android:name="com.example.iacccess.solicitar_acceso"
+        android:label="fragment_solicitar_acceso"
+        tools:layout="@layout/fragment_solicitar_acceso" />
+    <fragment
+        android:id="@+id/abrir_puerta"
+        android:name="com.example.iacccess.abrir_puerta"
+        android:label="fragment_abrir_puerta"
+        tools:layout="@layout/fragment_abrir_puerta" />
 </navigation>
