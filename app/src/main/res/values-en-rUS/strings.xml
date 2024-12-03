@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IAcccess</string>
+    //Botones
+    <string name="btnRegistrar">Register</string>
+    <string name="btnLogin">Login</string>
+    <string name="btnIniciarSesion">Login</string>
+    <string name="btnCambiarFoto">Change photo</string>
+    <string name="btnSubirImagen">Upload image</string>
+    <string name="btnRegistrarPortero">Register as a doorman</string>
+    <string name="btnProcesarVisita">Process visit</string>
+    <string name="btnVerHistorial">View history</string>
+    <string name="btnAccesoRegistros">Access to records</string>
+    <string name="btnRegistrarQR">Register QR</string>
+    <string name="btnLlamar">Call</string>
+
+    //Labels
+    <string name="labelNombre">Name</string>
+    <string name="labelApellido">Last Name</string>
+    <string name="labelCorreo">Email</string>
+    <string name="labelCelular">Phone number</string>
+    <string name="labelContrasenia">Password</string>
+    <string name="labelCompletarPerfil">Complete profile</string>
+    <string name="VerContraseña">See password</string>
+    <string name="CompletarPerfil">Complete profile</string>
+    <string name="CompletarPerfil2">Complete your profile</string>
+    <string name="Curp">CURP</string>
+    <string name="FrenteIne">Front of your INE</string>
+    <string name="RegistrarPortero">Registering as a Condominium Doorman</string>
+    <string name="IngresarCodigo">Enter the subdivision code</string>
+    <string name="HitCodigo">Code</string>
+    <string name="CompletarInfo">Fill in your information to generate your QR</string>
+    <string name="Visitas">Visits</string>
+    <string name="AccedeFraccionamiento">Access to a subdivision</string>
+    <string name="HistorialVisita">Visitor History</string>
+    <string name="VeTuHistorial">View your visit history</string>
+    <string name="RegistrarAcceso">Registrar Acceso</string>
+    <string name="RegistrarAcceso2">Registering visitor access to the subdivision</string>
+    <string name="MonitorearVisitante">Monitor Visitor</string>
+    <string name="ListaVisit">View List of visitors to the development</string>
+    <string name="SeleccionarVisitante">Select Visitor to Monitor</string>
+    <string name="Marcar">Mark the visitor you wish to monitor via gps and access information such as speed.</string>
+    <string name="Visitantes">Visitors</string>
+    <string name="Proveedores">Suppliers</string>
+    <string name="Monitorear">Monitor</string>
+    <string name="SolicitudesPendientes">Select pending visit requests</string>
+    <string name="SeleccioneSolicitudes">Select the visit request to track the QR scanning process.</string>
+    <string name="Inicio">Home</string>
+    <string name="Galería">Gallery</string>
+    <string name="Presentación">Slideshow</string>
+    <string name="CerrarSesion">Sign out</string>
+
+    //CheckBox
+    <string name="cbContrasenia">See Password</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_lenguaje">English</string>
+    <string name="action_lenguaje2">Spanish</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

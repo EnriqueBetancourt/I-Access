@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="92dp"
-            android:text="Completar Perfil"
+            android:text="@string/CompletarPerfil"
             app:layout_constraintBottom_toTopOf="@+id/imgPerfil"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="76dp"
             android:layout_marginBottom="20dp"
-            android:text="Cambiar foto"
+            android:text="@string/btnCambiarFoto"
             app:layout_constraintBottom_toTopOf="@+id/textView13"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="64dp"
             android:layout_marginBottom="16dp"
-            android:text="Completar Perfil"
+            android:text="@string/CompletarPerfil"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginBottom="68dp"
-            android:text="Subir imagen"
+            android:text="@string/btnSubirImagen"
             app:layout_constraintBottom_toTopOf="@+id/btnCompletarPerfil"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Frente de tu INE"
+            android:text="@string/FrenteIne"
             app:layout_constraintBottom_toTopOf="@+id/btnSubirImagen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.258"
