@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F1F1"
-    tools:context=".abrir_puerta">
+    tools:context=".AbrirPuerta">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="320dp"
@@ -20,7 +20,7 @@
 
     <!-- Título -->
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/txtPrueba"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -46,7 +46,7 @@
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+            app:layout_constraintTop_toBottomOf="@id/txtPrueba" />
 
 
     <!-- Contenedor de opciones -->

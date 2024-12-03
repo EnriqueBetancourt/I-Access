@@ -20,7 +20,7 @@
 
 
         <TextView
-            android:id="@+id/titleTextView"
+            android:id="@+id/txtPrueba"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="92dp"
@@ -46,7 +46,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+            app:layout_constraintTop_toBottomOf="@id/txtPrueba" />
 
         <EditText
             android:id="@+id/txtCodigoPortero"

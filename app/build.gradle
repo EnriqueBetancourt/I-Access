@@ -56,8 +56,13 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.3'
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 
-    implementation 'com.github.bumptech.glide:glide:4.15.1' // Versión actual de Glide
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    implementation 'com.google.android.gms:play-services-maps:19.0.0'// Versión actual de Glide
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1' // Para la generación de código
+
+
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
 
     //Escanner QR
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0'

@@ -27,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class HomeFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
-    Button btnProcesarVisita, btnCompletarPerfil;
+    Button btnProcesarVisita, btnCompletarPerfil, btnVerHistorial;
 
     private FragmentHomeBinding binding;
 
@@ -55,10 +55,11 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Referencias a tus vistas
-        TextView nombreTextView = view.findViewById(R.id.labelNombre);
+        TextView nombreTextView = view.findViewById(R.id.labelFraccionamiento);
         ImageView fotoImageView = view.findViewById(R.id.imgAccesoQR);
         btnProcesarVisita = view.findViewById(R.id.btnProcesarVista);
         btnCompletarPerfil = view.findViewById(R.id.btnCompletarPerfil);
+        btnVerHistorial = view.findViewById(R.id.btnVerHistorial);
         final NavController navController = Navigation.findNavController(view);
 
         // Obtener el usuario actual
@@ -120,6 +121,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.procesarVIsita);
+            }
+        });
+
+        btnVerHistorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.historialVisitasVisitante);
             }
         });
     }

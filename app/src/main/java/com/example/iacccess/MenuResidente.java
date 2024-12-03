@@ -18,34 +18,34 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MenuPortero#newInstance} factory method to
+ * Use the {@link MenuResidente#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MenuPortero extends Fragment {
+public class MenuResidente extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
-    private String mParam2;
-
-    private Button btnRegistrarAcceso, btnMonitorearVisitante;
-    TextView labelFraccionamiento;
+    private Button btnSoliciarAcceso, btnAbrirPuerta, btnVerHistorial;
+    private TextView labelFraccionamiento;
 
     // Firebase
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
 
-    public MenuPortero() {
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public MenuResidente() {
         // Required empty public constructor
     }
 
-    public static MenuPortero newInstance(String param1, String param2) {
-        MenuPortero fragment = new MenuPortero();
+    public static MenuResidente newInstance(String param1, String param2) {
+        MenuResidente fragment = new MenuResidente();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -70,32 +70,45 @@ public class MenuPortero extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu_portero, container, false);
+        return inflater.inflate(R.layout.fragment_menu_residente, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final NavController navController = Navigation.findNavController(view);
-
-        btnMonitorearVisitante = view.findViewById(R.id.btnAccesoRegistros);
-        btnRegistrarAcceso = view.findViewById(R.id.btnProcesarVista);
+        btnSoliciarAcceso = view.findViewById(R.id.botonSolicitarAcceso);
+        btnAbrirPuerta = view.findViewById(R.id.botonAbrirPuerta);
+        btnVerHistorial = view.findViewById(R.id.botonVerHistorial);
         labelFraccionamiento = view.findViewById(R.id.labelFraccionamiento);
 
-        btnRegistrarAcceso.setOnClickListener(new View.OnClickListener() {
+        final NavController navController = Navigation.findNavController(view);
+
+        // Navegar a la pantalla para solicitar acceso
+        btnSoliciarAcceso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.monitorearVisitantes);
+                Navigation.findNavController(view).navigate(R.id.solicitar_acceso);
             }
         });
 
-        btnMonitorearVisitante.setOnClickListener(new View.OnClickListener() {
+        // Navegar a la pantalla para abrir la puerta
+        btnAbrirPuerta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.registrarAcceso);
+                Navigation.findNavController(view).navigate(R.id.abrir_puerta);
             }
         });
+
+        // Deshabilitado por ahora: Navegar al historial de visitas
+        /*
+        btnVerHistorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.historialVisitasVisitante);
+            }
+        });
+         */
 
         // Obtener UID del usuario actual
         String userUID = mAuth.getCurrentUser().getUid();
@@ -109,13 +122,13 @@ public class MenuPortero extends Fragment {
                     // Obtener los datos del documento
                     String nombreFraccionamiento = document.getString("nombre");
                     String direccion = document.getString("direccion");
-                    // Obtener el arreglo de 'porteros' de cada documento
-                    Object porterosObj = document.get("porteros");
-                    if (porterosObj instanceof java.util.List) {
-                        java.util.List<String> porteros = (java.util.List<String>) porterosObj;
-                        // Verificar si el UID está en el arreglo de porteros
-                        if (porteros.contains(userUID)) {
-                            // Si es portero, mostrar el nombre del fraccionamiento en el TextView
+                    // Obtener el arreglo de 'residentes' de cada documento
+                    Object residentesObj = document.get("residentes");
+                    if (residentesObj instanceof java.util.List) {
+                        java.util.List<String> residentes = (java.util.List<String>) residentesObj;
+                        // Verificar si el UID está en el arreglo de residentes
+                        if (residentes.contains(userUID)) {
+                            // Si es residente, mostrar el nombre del fraccionamiento en el TextView
                             labelFraccionamiento.setText(nombreFraccionamiento);
                             break; // No es necesario seguir buscando
                         }

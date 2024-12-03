@@ -1,47 +1,47 @@
 package com.example.iacccess;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link monitorearVisitantes#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class monitorearVisitantes extends Fragment {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
-    public monitorearVisitantes() {
-        // Required empty public constructor
+public class MonitorearVisitantes extends Fragment implements VisitaAdapter.OnVisitaSelectedListener {
+
+    private RecyclerView recyclerView;
+    private VisitaAdapter visitaAdapter;
+    private List<Visita> visitaList;
+    private FirebaseFirestore db;
+
+    private Button btnMonitorear, btnRegistrarSalida;
+    private String idDocumentoSeleccionado;  // Variable para almacenar el ID del documento seleccionado
+
+    public MonitorearVisitantes() {
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment monitorearVisitantes.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static monitorearVisitantes newInstance(String param1, String param2) {
-        monitorearVisitantes fragment = new monitorearVisitantes();
+    public static MonitorearVisitantes newInstance(String param1, String param2) {
+        MonitorearVisitantes fragment = new MonitorearVisitantes();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("param1", param1);
+        args.putString("param2", param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,16 +49,166 @@ public class monitorearVisitantes extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_monitorear_visitantes, container, false);
+        View view = inflater.inflate(R.layout.fragment_monitorear_visitantes, container, false);
+        return view;
     }
+
+    private void cargarVisitas() {
+        // Llamada para obtener los documentos de la colección 'visitas'
+        db.collection("visitas")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    // Limpiar la lista antes de agregar nuevos datos
+                    visitaList.clear();
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        // Extraer la información necesaria del documento
+                        String idResidente = document.getString("idResidente");
+                        String idVisitante = document.getString("idVisitante");
+                        String motivo = document.getString("motivo");
+                        String fechaHoraEntrada = document.getString("fechaHoraEntrada");
+                        String fechaHoraSalida = document.getString("fechaHoraSalida");
+                        String idDocumento = document.getId();  // Aquí obtienes el ID del documento
+                        String idPortero = document.getString("idPortero");
+                        double latitud = document.contains("latitud") ? document.getDouble("latitud") : 0.0;
+                        double longitud = document.contains("longitud") ? document.getDouble("longitud") : 0.0;
+
+                        // Crear el objeto Visita con los campos que necesitas
+                        Visita visita = new Visita(idResidente, idVisitante, idPortero, motivo, fechaHoraEntrada, idDocumento, latitud, longitud);
+
+                        // Agregar la visita a la lista
+                        visitaList.add(visita);
+                    }
+
+                    // Notificar al adaptador que los datos han cambiado
+                    visitaAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    // En caso de error al cargar las visitas
+                    Toast.makeText(getContext(), "Error al cargar visitas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        btnMonitorear = view.findViewById(R.id.btnMonitorear);
+        btnRegistrarSalida = view.findViewById(R.id.btnRegistrarSalida);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        visitaList = new ArrayList<>();
+        visitaAdapter = new VisitaAdapter(visitaList, this);  // Asegúrate de pasar this (el fragmento implementa la interfaz)
+        recyclerView.setAdapter(visitaAdapter);
+
+        db = FirebaseFirestore.getInstance();
+        cargarVisitas();
+
+        btnMonitorear.setOnClickListener(v -> {
+            if (idDocumentoSeleccionado != null && !idDocumentoSeleccionado.isEmpty()) {
+                Bundle args = new Bundle();
+                args.putString("idVisita", idDocumentoSeleccionado);  // Pasar el ID del documento al siguiente fragmento
+                Navigation.findNavController(v).navigate(R.id.monitoreoMapa, args);
+            } else {
+                Toast.makeText(getContext(), "Seleccione una visita", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnRegistrarSalida.setOnClickListener(v -> {
+            if (idDocumentoSeleccionado != null && !idDocumentoSeleccionado.isEmpty()) {
+                // Referencia al documento seleccionado
+                db.collection("visitas")
+                        .document(idDocumentoSeleccionado)
+                        .get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            if (documentSnapshot.exists()) {
+                                // Obtener los datos del documento
+                                String idResidente = documentSnapshot.getString("idResidente");
+                                String idVisitante = documentSnapshot.getString("idVisitante");
+                                String idPortero = documentSnapshot.getString("idPortero");
+                                String motivo = documentSnapshot.getString("motivo");
+                                String fechaHoraEntrada = documentSnapshot.getString("fechaHoraEntrada");
+
+                                // Registrar la hora de salida actual
+                                String fechaHoraSalida = obtenerHoraActual(); // Función para obtener la hora actual
+
+                                // Consultar la información del portero para obtener el idFraccionamiento
+                                db.collection("fraccionamientos")  // Buscar en 'fraccionamientos' usando idPortero
+                                        .get()
+                                        .addOnSuccessListener(fraccionamientos -> {
+                                            String idFraccionamiento = null;
+
+                                            for (QueryDocumentSnapshot fraccionamiento : fraccionamientos) {
+                                                List<String> porteros = (List<String>) fraccionamiento.get("porteros");
+                                                if (porteros != null && porteros.contains(idPortero)) {
+                                                    idFraccionamiento = fraccionamiento.getId();
+                                                    break; // Salir del bucle al encontrar el fraccionamiento
+                                                }
+                                            }
+
+                                            if (idFraccionamiento != null) {
+                                                // Crear un mapa con los datos
+                                                HashMap<String, Object> historialData = new HashMap<>();
+                                                historialData.put("idResidente", idResidente);
+                                                historialData.put("idVisitante", idVisitante);
+                                                historialData.put("idPortero", idPortero);
+                                                historialData.put("motivo", motivo);
+                                                historialData.put("fechaHoraEntrada", fechaHoraEntrada);
+                                                historialData.put("fechaHoraSalida", fechaHoraSalida);
+                                                historialData.put("idFraccionamiento", idFraccionamiento); // Agregar idFraccionamiento
+
+                                                // Guardar los datos en la colección 'historialVisitas'
+                                                db.collection("historialVisitas")
+                                                        .add(historialData)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            // Eliminar el documento original de la colección 'visitas'
+                                                            db.collection("visitas")
+                                                                    .document(idDocumentoSeleccionado)
+                                                                    .delete()
+                                                                    .addOnSuccessListener(aVoid1 -> {
+                                                                        Toast.makeText(getContext(), "Salida registrada y visita movida al historial.", Toast.LENGTH_SHORT).show();
+                                                                        cargarVisitas(); // Recargar la lista
+                                                                    })
+                                                                    .addOnFailureListener(e -> {
+                                                                        Toast.makeText(getContext(), "Error al eliminar la visita: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                    });
+                                                        })
+                                                        .addOnFailureListener(e -> {
+                                                            Toast.makeText(getContext(), "Error al guardar en el historial: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        });
+                                            } else {
+                                                Toast.makeText(getContext(), "No se encontró el fraccionamiento para este portero.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Toast.makeText(getContext(), "Error al obtener los fraccionamientos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        });
+                            } else {
+                                Toast.makeText(getContext(), "Documento no encontrado.", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(getContext(), "Error al obtener los datos de la visita: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                Toast.makeText(getContext(), "Seleccione una visita para registrar la salida.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onVisitaSelected(String idDocumentoVisita) {
+        idDocumentoSeleccionado = idDocumentoVisita;  // Guardar el ID del documento seleccionado
+        Toast.makeText(getContext(), "ID Seleccionado: " + idDocumentoVisita, Toast.LENGTH_SHORT).show();  // Mensaje para verificar
+    }
+
+    private String obtenerHoraActual() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+    }
+
 }

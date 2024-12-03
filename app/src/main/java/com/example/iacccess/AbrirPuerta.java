@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link menu_residente#newInstance} factory method to
+ * Use the {@link AbrirPuerta#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class menu_residente extends Fragment {
+public class AbrirPuerta extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +24,7 @@ public class menu_residente extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public menu_residente() {
+    public AbrirPuerta() {
         // Required empty public constructor
     }
 
@@ -34,11 +34,11 @@ public class menu_residente extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment menu_residente.
+     * @return A new instance of fragment abrir_puerta.
      */
     // TODO: Rename and change types and number of parameters
-    public static menu_residente newInstance(String param1, String param2) {
-        menu_residente fragment = new menu_residente();
+    public static AbrirPuerta newInstance(String param1, String param2) {
+        AbrirPuerta fragment = new AbrirPuerta();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +59,6 @@ public class menu_residente extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu_residente, container, false);
+        return inflater.inflate(R.layout.fragment_abrir_puerta, container, false);
     }
 }

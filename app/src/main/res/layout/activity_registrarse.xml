@@ -57,7 +57,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
 
         <TextView
-            android:id="@+id/labelNombre"
+            android:id="@+id/labelFraccionamiento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -81,7 +81,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelNombre" />
+            app:layout_constraintTop_toBottomOf="@+id/labelFraccionamiento" />
 
         <TextView
             android:id="@+id/labelNumeroCelular"

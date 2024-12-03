@@ -65,11 +65,11 @@ public class Registrarse extends AppCompatActivity {
                 nombre = String.valueOf(txtNombre.getText());
                 apellido = String.valueOf(txtApellido.getText());
                 celular = String.valueOf(txtCelular.getText());
-                if (TextUtils.isEmpty(correo)){
+                if (TextUtils.isEmpty(correo)) {
                     Toast.makeText(Registrarse.this, "Ingresa tu correo", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(contrasenia)){
+                if (TextUtils.isEmpty(contrasenia)) {
                     Toast.makeText(Registrarse.this, "Ingresa tu contrasenia", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -91,6 +91,12 @@ public class Registrarse extends AppCompatActivity {
                                     userInfo.put("curp", null);
                                     userInfo.put("fotoINE", null);
                                     userInfo.put("fotoPerfil", fotoDefecto);
+
+                                    // Agregar roles iniciales como nulos
+                                    Map<String, Object> roles = new HashMap<>();
+                                    roles.put("residente", null);
+                                    roles.put("portero", null);
+                                    userInfo.put("roles", roles);
 
                                     // Generar QR con el userId
                                     Bitmap qrCodeBitmap = generarQRCode(userId);
@@ -139,6 +145,7 @@ public class Registrarse extends AppCompatActivity {
                         });
             }
         });
+
 
         cbVerContrasenia.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
