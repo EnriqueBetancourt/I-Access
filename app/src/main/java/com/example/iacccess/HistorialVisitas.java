@@ -11,6 +11,8 @@ public class HistorialVisitas {
     private String nombreVisitante;
     private String nombreResidente;
 
+    private String idFraccionamiento;
+
     // Constructor
     public HistorialVisitas(String fechaHoraEntrada, String fechaHoraSalida, String idPortero, String idResidente, String idVisitante, String motivo, String fraccionamiento) {
         this.fechaHoraEntrada = fechaHoraEntrada;
@@ -63,5 +65,13 @@ public class HistorialVisitas {
 
     public void setNombreResidente(String nombreResidente) {
         this.nombreResidente = nombreResidente;
+    }
+
+    public String getIdFraccionamiento() {
+        return idFraccionamiento;
+    }
+
+    public void setIdFraccionamiento(String idFraccionamiento) {
+        this.idFraccionamiento = idFraccionamiento;
     }
 }

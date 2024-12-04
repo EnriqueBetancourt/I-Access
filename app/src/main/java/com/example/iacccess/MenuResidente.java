@@ -101,14 +101,14 @@ public class MenuResidente extends Fragment {
         });
 
         // Deshabilitado por ahora: Navegar al historial de visitas
-        /*
+
         btnVerHistorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.historialVisitasVisitante);
+                Navigation.findNavController(view).navigate(R.id.historialVisitasResidente);
             }
         });
-         */
+
 
         // Obtener UID del usuario actual
         String userUID = mAuth.getCurrentUser().getUid();

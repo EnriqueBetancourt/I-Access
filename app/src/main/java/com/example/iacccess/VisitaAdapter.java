@@ -34,18 +34,18 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.VisitaView
     public void onBindViewHolder(@NonNull VisitaViewHolder holder, int position) {
         Visita visita = visitasList.get(position);
 
-        // Asignar datos al layout
-        holder.textNombre.setText(visita.getIdVisitante());
+        // Mostrar el nombre completo del visitante en lugar del id
+        holder.textNombre.setText(visita.getNombreVisitante());
         holder.textMotivo.setText(visita.getMotivo());
         holder.textEntrada.setText("Entrada: " + visita.getFechaHoraEntrada());
 
-        // Establecer la acción al marcar el CheckBox
         holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                listener.onVisitaSelected(visita.getIdDocumento());  // Llamamos al listener para pasar el idDocumentoVisita
+                listener.onVisitaSelected(visita.getIdDocumento());
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

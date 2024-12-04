@@ -37,9 +37,25 @@ public class HistorialVisitasAdapter extends RecyclerView.Adapter<HistorialVisit
         if (visita != null) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            // Verificar si es visitante o residente
+            // Obtener el idFraccionamiento desde la visita
+            String idFraccionamiento = visita.getIdFraccionamiento(); // Acceder correctamente al campo
+
+            // Usar el idFraccionamiento para obtener el nombre del fraccionamiento
+            db.collection("fraccionamientos")
+                    .document(idFraccionamiento)  // Usar el idFraccionamiento obtenido
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String nombreFraccionamiento = documentSnapshot.getString("nombre");
+                            holder.fraccionamiento.setText("Fraccionamiento: " + nombreFraccionamiento);
+                        } else {
+                            holder.fraccionamiento.setText("Fraccionamiento desconocido");
+                        }
+                    })
+                    .addOnFailureListener(e -> holder.fraccionamiento.setText("Error al cargar el fraccionamiento"));
+
+            // Consultar los datos del residente o visitante (el código sigue igual)
             if (userUID.equals(visita.getIdVisitante())) {
-                // Consultar el nombre del residente
                 db.collection("usuarios")
                         .document(visita.getIdResidente())
                         .get()
@@ -54,7 +70,6 @@ public class HistorialVisitasAdapter extends RecyclerView.Adapter<HistorialVisit
                         })
                         .addOnFailureListener(e -> holder.invitedBy.setText("Error al cargar el residente"));
             } else if (userUID.equals(visita.getIdResidente())) {
-                // Consultar el nombre del visitante
                 db.collection("usuarios")
                         .document(visita.getIdVisitante())
                         .get()
@@ -77,8 +92,10 @@ public class HistorialVisitasAdapter extends RecyclerView.Adapter<HistorialVisit
             holder.checkInTime.setText("Datos no disponibles");
             holder.checkOutTime.setText("Datos no disponibles");
             holder.invitedBy.setText("Datos no disponibles");
+            holder.fraccionamiento.setText("Datos no disponibles");
         }
     }
+
 
 
     @Override
@@ -87,13 +104,14 @@ public class HistorialVisitasAdapter extends RecyclerView.Adapter<HistorialVisit
     }
 
     public static class HistorialViewHolder extends RecyclerView.ViewHolder {
-
+        public TextView fraccionamiento;
         public TextView checkInTime;
         public TextView checkOutTime;
         public TextView invitedBy;
 
         public HistorialViewHolder(View itemView) {
             super(itemView);
+            fraccionamiento = itemView.findViewById(R.id.fraccionamiento);
             checkInTime = itemView.findViewById(R.id.checkInTime);
             checkOutTime = itemView.findViewById(R.id.checkOutTime);
             invitedBy = itemView.findViewById(R.id.invitedBy);

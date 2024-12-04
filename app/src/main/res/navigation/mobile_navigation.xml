@@ -94,11 +94,6 @@
             app:destination="@id/nav_home" />
     </fragment>
     <fragment
-        android:id="@+id/escanearQr"
-        android:name="com.example.iacccess.escanearQr"
-        android:label="fragment_escanear_qr"
-        tools:layout="@layout/fragment_escanear_qr" />
-    <fragment
         android:id="@+id/menu_residente"
         android:name="com.example.iacccess.MenuResidente"
         android:label="fragment_menu_residente"
@@ -106,6 +101,9 @@
         <action
             android:id="@+id/action_menu_residente_to_solicitar_acceso2"
             app:destination="@id/solicitar_acceso" />
+        <action
+            android:id="@+id/action_menu_residente_to_historialVisitasResidente"
+            app:destination="@id/historialVisitasResidente" />
     </fragment>
     <fragment
         android:id="@+id/solicitar_acceso"
@@ -136,5 +134,14 @@
         <action
             android:id="@+id/action_monitoreoMapa_to_monitorearVisitantes"
             app:destination="@id/monitorearVisitantes" />
+    </fragment>
+    <fragment
+        android:id="@+id/historialVisitasResidente"
+        android:name="com.example.iacccess.HistorialVisitasResidente"
+        android:label="fragment_historial_visitas_residente"
+        tools:layout="@layout/fragment_historial_visitas_residente" >
+        <action
+            android:id="@+id/action_historialVisitasResidente_to_menu_residente"
+            app:destination="@id/menu_residente" />
     </fragment>
 </navigation>

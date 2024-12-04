@@ -15,7 +15,9 @@ public class Visita {
 
     // Constructor vacío requerido para Firebase
     public Visita() {}
+    private String nombreVisitante;
 
+    // Constructor
     public Visita(String idResidente, String idVisitante, String idPortero, String motivo,
                   String fechaHoraEntrada, String idDocumento, double latitud, double longitud) {
         this.idResidente = idResidente;
@@ -28,6 +30,15 @@ public class Visita {
         this.longitud = longitud;
     }
 
+    // Getters y setters
+
+    public String getNombreVisitante() {
+        return nombreVisitante;
+    }
+
+    public void setNombreVisitante(String nombreVisitante) {
+        this.nombreVisitante = nombreVisitante;
+    }
 
     public void setIdDocumento(String idDocumento) {
         this.idDocumento = idDocumento;

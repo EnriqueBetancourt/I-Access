@@ -1,6 +1,7 @@
 package com.example.iacccess;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,39 +60,51 @@ public class MonitorearVisitantes extends Fragment implements VisitaAdapter.OnVi
     }
 
     private void cargarVisitas() {
-        // Llamada para obtener los documentos de la colección 'visitas'
         db.collection("visitas")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    // Limpiar la lista antes de agregar nuevos datos
                     visitaList.clear();
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        // Extraer la información necesaria del documento
                         String idResidente = document.getString("idResidente");
                         String idVisitante = document.getString("idVisitante");
                         String motivo = document.getString("motivo");
                         String fechaHoraEntrada = document.getString("fechaHoraEntrada");
-                        String fechaHoraSalida = document.getString("fechaHoraSalida");
-                        String idDocumento = document.getId();  // Aquí obtienes el ID del documento
+                        String idDocumento = document.getId();
                         String idPortero = document.getString("idPortero");
                         double latitud = document.contains("latitud") ? document.getDouble("latitud") : 0.0;
                         double longitud = document.contains("longitud") ? document.getDouble("longitud") : 0.0;
 
-                        // Crear el objeto Visita con los campos que necesitas
+                        // Crear objeto Visita
                         Visita visita = new Visita(idResidente, idVisitante, idPortero, motivo, fechaHoraEntrada, idDocumento, latitud, longitud);
 
-                        // Agregar la visita a la lista
-                        visitaList.add(visita);
-                    }
+                        // Obtener el nombre del visitante desde la colección de usuarios
+                        db.collection("usuarios")
+                                .document(idVisitante)
+                                .get()
+                                .addOnSuccessListener(visitanteSnapshot -> {
+                                    if (visitanteSnapshot.exists()) {
+                                        String nombre = visitanteSnapshot.getString("nombre");
+                                        String apellido = visitanteSnapshot.getString("apellido");
+                                        visita.setNombreVisitante(nombre + " " + apellido);  // Establecer nombre completo
+                                    } else {
+                                        visita.setNombreVisitante("Visitante desconocido");
+                                    }
 
-                    // Notificar al adaptador que los datos han cambiado
-                    visitaAdapter.notifyDataSetChanged();
+                                    visitaList.add(visita);
+
+                                    // Solo notificar al adaptador cuando todas las visitas se han cargado
+                                    if (visitaList.size() == queryDocumentSnapshots.size()) {
+                                        visitaAdapter.notifyDataSetChanged();
+                                    }
+                                })
+                                .addOnFailureListener(e -> Log.e("MonitorearVisitantes", "Error al obtener nombre del visitante: " + e.getMessage()));
+                    }
                 })
                 .addOnFailureListener(e -> {
-                    // En caso de error al cargar las visitas
                     Toast.makeText(getContext(), "Error al cargar visitas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
