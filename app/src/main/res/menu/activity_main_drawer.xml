@@ -14,15 +14,15 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_visitante"
-            android:title="Menu Visitante" />
+            android:title="@String/Inicio" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_portero"
-            android:title="Menu Portero" />
+            android:title="@string/Galería" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_residente"
-            android:title="Menu Residente" />
+            android:title="@string/Presentación"" />
     </group>
 
     <item
@@ -35,5 +35,5 @@
     <item
         android:id="@+id/nav_salir"
         android:icon="@drawable/ic_cerrar_sesion"
-        android:title="Cerrar Sesion" />
+        android:title="@string/CerrarSesion" />
 </menu>

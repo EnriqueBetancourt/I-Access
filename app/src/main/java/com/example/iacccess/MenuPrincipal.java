@@ -3,13 +3,22 @@ package com.example.iacccess;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -100,6 +109,31 @@ public class MenuPrincipal extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_lenguaje) { // ID del ítem del menú
+            setLocale("en"); // Cambia el idioma a inglés
+            return true;
+        }
+        if (item.getItemId() == R.id.action_lenguaje2) { // ID del ítem del menú
+            setLocale("es"); // Cambia el idioma a español
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setLocale(String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+
+        Resources resources = getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+        // Reinicia la actividad para aplicar el cambio de idioma
+        recreate();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
