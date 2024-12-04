@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.493">
 
         <TextView
             android:id="@+id/txtPrueba"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Seleccionar solicitudes de visita pendientes"
+            android:text="@string/SolicitudesPendientes"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:text="Seleccione la solicitud de visita para hacer un seguimiento del proceso de escaneo QR."
+            android:text="@string/SeleccioneSolicitudes"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@android:color/black"
-            android:text="Registrar Visita"
+            android:text="@string/registrarVisita"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +111,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="27dp"
             android:backgroundTint="@android:color/black"
-            android:text="Escanear QR"
+            android:text="@string/escanearQR"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/btnLlamada"
             app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +124,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="9dp"
-            android:text="Llamar al residente"
+            android:backgroundTint="@android:color/black"
+            android:text="@string/llamarResidente"
             app:layout_constraintBottom_toTopOf="@+id/btnRegistrarVisita"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

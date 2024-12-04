@@ -14,7 +14,7 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_visitante"
-            android:title="@String/Inicio" />
+            android:title="@string/Inicio" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_portero"
@@ -22,7 +22,7 @@
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_residente"
-            android:title="@string/Presentación"" />
+            android:title="@string/Presentación" />
     </group>
 
     <item

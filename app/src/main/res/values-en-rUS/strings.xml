@@ -13,6 +13,10 @@
     <string name="btnAccesoRegistros">Access to records</string>
     <string name="btnRegistrarQR">Register QR</string>
     <string name="btnLlamar">Call</string>
+    <string name="escanearQR">Scan QR</string>
+    <string name="llamarResidente">Call the Resident</string>
+    <string name="registrarVisita">Register Visit</string>
+    <string name="registrarSalida">Register Exit</string>
 
     //Labels
     <string name="labelNombre">Name</string>
@@ -27,15 +31,15 @@
     <string name="Curp">CURP</string>
     <string name="FrenteIne">Front of your INE</string>
     <string name="RegistrarPortero">Registering as a Condominium Doorman</string>
-    <string name="IngresarCodigo">Enter the subdivision code</string>
+    <string name="IngresarCodigo">Enter the gated community code</string>
     <string name="HitCodigo">Code</string>
     <string name="CompletarInfo">Fill in your information to generate your QR</string>
     <string name="Visitas">Visits</string>
-    <string name="AccedeFraccionamiento">Access to a subdivision</string>
+    <string name="AccedeFraccionamiento">Access to a gated community</string>
     <string name="HistorialVisita">Visitor History</string>
     <string name="VeTuHistorial">View your visit history</string>
-    <string name="RegistrarAcceso">Registrar Acceso</string>
-    <string name="RegistrarAcceso2">Registering visitor access to the subdivision</string>
+    <string name="RegistrarAcceso">Register Access</string>
+    <string name="RegistrarAcceso2">Registering visitor access to the gated community</string>
     <string name="MonitorearVisitante">Monitor Visitor</string>
     <string name="ListaVisit">View List of visitors to the development</string>
     <string name="SeleccionarVisitante">Select Visitor to Monitor</string>
@@ -45,10 +49,34 @@
     <string name="Monitorear">Monitor</string>
     <string name="SolicitudesPendientes">Select pending visit requests</string>
     <string name="SeleccioneSolicitudes">Select the visit request to track the QR scanning process.</string>
-    <string name="Inicio">Home</string>
-    <string name="Galería">Gallery</string>
-    <string name="Presentación">Slideshow</string>
+    <string name="Inicio">Visitor Menu</string>
+    <string name="Galería">Porter Menu</string>
+    <string name="Presentación">Resident Menu</string>
     <string name="CerrarSesion">Sign out</string>
+    <string name="CodigoQR">QR Code</string>
+    <string name="procesarVistaInfo">Access the gated community by scanning the code.</string>
+    <string name="estasDeVisita">You are visiting: </string>
+    <string name="horaDeEntrada">Check-in time:</string>
+    <string name="fraccionamiento">Gated Community</string>
+
+    <string name="solicitarAcceso">Request Access</string>
+    <string name="solicitarAccesoInfo">Send the name and reason for your visit to the doorman.</string>
+    <string name="abrirPuerta">Open Door</string>
+    <string name="abrirPuertaInfo">Access the gate of your gated community and open it yourself.</string>
+    <string name="historialVisitas">Visitor History</string>
+    <string name="historialVisitasInfo">View the history of people who have visited you.</string>
+    <string name="verHistorial">View History</string>
+
+    <string name="abrirPuertaInfo2">Remember to be close to the door you want to open</string>
+    <string name="abrirPuertaPrincipal">Main Door</string>
+
+    <string name="solicitarAccesoInfo1">Register Access as a Resident</string>
+    <string name="solicitarAccesoInfo2">Request access for your visitor to the gatekeeper</string>
+    <string name="nombreCompletoVisitante">Enter the visitor\'s full name</string>
+    <string name="motivoVisita">Enter the Reason for Visit</string>
+    <string name="solicitarAccesoInfo3">Your visitor/supplier does not have the application, share this code by other means.</string>
+    <string name="compartir">Share</string>
+    <string name="cambiarIdioma">Español</string>
 
     //CheckBox
     <string name="cbContrasenia">See Password</string>

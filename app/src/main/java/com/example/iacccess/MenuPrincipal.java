@@ -2,23 +2,14 @@ package com.example.iacccess;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -32,42 +23,25 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Locale;
 
-
-
 public class MenuPrincipal extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuBinding binding;
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_settings) { // ID del ítem del menú
-            Toast.makeText(MenuPrincipal.this, "Error crítico: ", Toast.LENGTH_LONG).show();
-
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
-    public static void setLocale(Context context, String languageCode) {
-        Locale locale = new Locale(languageCode);
-        Locale.setDefault(locale);
-
-        Configuration config = new Configuration();
-        config.setLocale(locale);
-
-        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
-    }
-
-
-
+    private String currentLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        // Recuperar el idioma guardado en las preferencias
+        SharedPreferences preferences = getSharedPreferences("Idioma", MODE_PRIVATE);
+        currentLanguage = preferences.getString("lenguaje", "es"); // Por defecto: español
 
+        // Aplicar el idioma antes de inflar el diseño
+        applySavedLocale(currentLanguage);
+
+        super.onCreate(savedInstanceState); // Mover super.onCreate después de la configuración del idioma
+
+        // Inflar el diseño
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -85,7 +59,6 @@ public class MenuPrincipal extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        // **Agrega el listener para manejar clics en los ítems del Navigation Drawer**
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
@@ -100,10 +73,9 @@ public class MenuPrincipal extends AppCompatActivity {
                 return true;
             }
 
-            // Para otros ítems, delega la navegación al NavController
             boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
             if (handled) {
-                drawer.closeDrawer(GravityCompat.START); // Cierra el drawer después de navegar
+                drawer.closeDrawer(GravityCompat.START);
             }
             return handled;
         });
@@ -111,28 +83,35 @@ public class MenuPrincipal extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_lenguaje) { // ID del ítem del menú
-            setLocale("en"); // Cambia el idioma a inglés
-            return true;
-        }
-        if (item.getItemId() == R.id.action_lenguaje2) { // ID del ítem del menú
-            setLocale("es"); // Cambia el idioma a español
+        if (item.getItemId() == R.id.action_lenguaje) { // ID único del ítem del menú
+            // Alternar entre inglés y español
+            String newLanguage = currentLanguage.equals("en") ? "es" : "en";
+            changeLanguage(newLanguage);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void setLocale(String languageCode) {
+    private void applySavedLocale(String languageCode) {
         Locale locale = new Locale(languageCode);
         Locale.setDefault(locale);
 
-        Resources resources = getResources();
-        Configuration config = resources.getConfiguration();
+        Configuration config = new Configuration();
         config.setLocale(locale);
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
 
-        // Reinicia la actividad para aplicar el cambio de idioma
-        recreate();
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+    }
+
+    private void changeLanguage(String languageCode) {
+        // Guardar el idioma en SharedPreferences
+        SharedPreferences.Editor editor = getSharedPreferences("Idioma", MODE_PRIVATE).edit();
+        editor.putString("lenguaje", languageCode);
+        editor.apply();
+
+        // Reiniciar la actividad usando un Intent
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
     @Override
@@ -148,6 +127,4 @@ public class MenuPrincipal extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
-
 }

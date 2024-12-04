@@ -109,7 +109,7 @@ public class CompletarPerfil extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         btnCambiarFoto = view.findViewById(R.id.btnCambiarFoto);
-        fotoImageView = view.findViewById(R.id.imgAccesoQR);
+        fotoImageView = view.findViewById(R.id.imgPerfil);
 
         btnSeleccionarIne = view.findViewById(R.id.btnSubirImagen);
         btnCompletarPerfil = view.findViewById(R.id.btnCompletarPerfil);

@@ -89,6 +89,8 @@ public class SolicitarAcceso extends Fragment {
                 .addOnFailureListener(e ->
                         Toast.makeText(getContext(), "Error al enviar solicitud: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
+        editTextMotivo.setText("");
+        editTextNombre.setText("");
     }
 
     private void generarYCompartirQR() {
