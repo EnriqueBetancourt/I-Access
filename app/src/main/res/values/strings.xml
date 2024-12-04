@@ -68,6 +68,7 @@
     <string name="abrirPuertaInfo2">Recuerde estar cerca de la puerta que desea abrir</string>
     <string name="abrirPuertaPrincipal">Puerta Principal</string>
 
+
     <string name="solicitarAccesoInfo1">Registrar Acceso como Residente</string>
     <string name="solicitarAccesoInfo2">Solicita acceso para tu visitante al portero</string>
     <string name="nombreCompletoVisitante">Ingresa el nombre completo del visitante</string>
