@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
+import com.example.iacccess.MainActivity;
 import com.example.iacccess.R;
 import com.example.iacccess.databinding.FragmentHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,6 +63,7 @@ public class HomeFragment extends Fragment {
         btnCompletarPerfil = view.findViewById(R.id.btnCompletarPerfil);
         btnVerHistorial = view.findViewById(R.id.btnVerHistorial);
         final NavController navController = Navigation.findNavController(view);
+
 
         // Obtener el usuario actual
         mAuth = FirebaseAuth.getInstance();
@@ -131,5 +134,4 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
 }

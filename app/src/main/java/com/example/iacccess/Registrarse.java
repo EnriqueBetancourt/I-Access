@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +36,7 @@ import java.util.Map;
 public class Registrarse extends AppCompatActivity {
 
     Button btnRegistrarse;
+    ImageButton btnRegresar;
     EditText txtCorreo, txtContrasenia, txtCelular, txtApellido, txtNombre;
     CheckBox cbVerContrasenia;
     FirebaseAuth mAuth;
@@ -56,6 +58,7 @@ public class Registrarse extends AppCompatActivity {
         txtCelular = findViewById(R.id.txtCelular);
         btnRegistrarse = findViewById(R.id.btnRegistrarse);
         cbVerContrasenia = findViewById(R.id.cbVerContrasenia);
+        btnRegresar = findViewById(R.id.btnRegresar);
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,6 +146,15 @@ public class Registrarse extends AppCompatActivity {
                                 Toast.makeText(Registrarse.this, "Error al registrar el usuario.", Toast.LENGTH_SHORT).show();
                             }
                         });
+            }
+        });
+
+        btnRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Registrarse.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

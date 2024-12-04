@@ -26,6 +26,7 @@
             android:layout_marginEnd="152dp"
             android:layout_marginBottom="17dp"
             android:text="Ver historial"
+            android:backgroundTint="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -48,6 +49,7 @@
             android:layout_marginEnd="136dp"
             android:layout_marginBottom="22dp"
             android:text="Procesar Visita"
+            android:backgroundTint="@android:color/black"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -84,6 +86,7 @@
             android:layout_marginEnd="124dp"
             android:layout_marginBottom="8dp"
             android:text="Historial de Visita"
+
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/textView7"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -132,6 +135,7 @@
             android:layout_marginTop="13dp"
             android:layout_marginEnd="112dp"
             android:text="Completar tu perfil"
+            android:backgroundTint="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
