@@ -106,15 +106,15 @@
         <action
             android:id="@+id/action_menu_residente_to_solicitar_acceso2"
             app:destination="@id/solicitar_acceso" />
+        <action
+            android:id="@+id/action_menu_residente_to_abrir_puerta"
+            app:destination="@id/abrir_puerta" />
     </fragment>
     <fragment
         android:id="@+id/solicitar_acceso"
         android:name="com.example.iacccess.SolicitarAcceso"
         android:label="fragment_solicitar_acceso"
         tools:layout="@layout/fragment_solicitar_acceso" >
-        <action
-            android:id="@+id/action_solicitar_acceso_to_abrir_puerta"
-            app:destination="@id/abrir_puerta" />
         <action
             android:id="@+id/action_solicitar_acceso_to_menu_residente2"
             app:destination="@id/menu_residente" />
