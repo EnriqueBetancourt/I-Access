@@ -93,6 +93,7 @@
             android:id="@+id/action_procesarVIsita_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
+
     <fragment
         android:id="@+id/menu_residente"
         android:name="com.example.iacccess.MenuResidente"

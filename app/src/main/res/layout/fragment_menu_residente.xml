@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,16 +8,20 @@
     android:background="#F4F1F1"
     tools:context=".MenuPortero">
 
-    <!-- Contenedor de perfil -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contenedorPerfil"
-        android:layout_width="292dp"
-        android:layout_height="177dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/contenedor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Contenedor de perfil -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contenedorPerfil"
+            android:layout_width="292dp"
+            android:layout_height="177dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/contenedor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView12"
@@ -172,4 +177,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textoDescripcionHistorial" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
