@@ -258,7 +258,7 @@ public class RegistrarAcceso extends Fragment {
 
                         if (nombre != null && celularResidente != null) {
                             String nombreCompleto = nombre + " " + apellido;
-                            txtInformacion.setText("Nombre residente: " + nombreCompleto + "\nCelular: " + celularResidente);
+                            txtInformacion.setText("Nombre del visitante: " + nombreCompleto + "\nCelular: " + celularResidente);
                         } else {
                             txtInformacion.setText("Información incompleta del residente.");
                         }

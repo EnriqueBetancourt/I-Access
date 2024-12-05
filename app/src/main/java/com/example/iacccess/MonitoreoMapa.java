@@ -18,11 +18,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MonitoreoMapa extends Fragment implements OnMapReadyCallback {
 
-    private TextView txtIdVisitante;  // Para mostrar el ID del visitante
+    private TextView txtIdVisitante, txtInformacion;  // Para mostrar el ID del visitante
     private MapView mapView;         // Mapa de Google Maps
     private GoogleMap googleMap;     // Objeto del mapa
     private FirebaseFirestore db;    // Conexión a Firestore
@@ -40,13 +41,13 @@ public class MonitoreoMapa extends Fragment implements OnMapReadyCallback {
 
         // Vincular vistas
         txtIdVisitante = view.findViewById(R.id.txtPrueba);
+        txtInformacion = view.findViewById(R.id.txtInformacion);
         mapView = view.findViewById(R.id.mapView);
 
         // Recuperar el ID del documento de la visita desde los argumentos
         Bundle args = getArguments();
         if (args != null) {
             idDocumentoVisita = args.getString("idVisita");  // Ahora se recibe el ID del documento de la visita
-            txtIdVisitante.setText("ID de Visita: " + idDocumentoVisita);  // Mostrar ID en el TextView
         } else {
             txtIdVisitante.setText("No se pasó el ID de la visita.");
             return view;
@@ -61,6 +62,9 @@ public class MonitoreoMapa extends Fragment implements OnMapReadyCallback {
         // Configurar MapView y obtener el mapa cuando esté listo
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
+        // Cargar la información de la visita
+        cargarInformacionVisita();
 
         return view;
     }
@@ -113,6 +117,45 @@ public class MonitoreoMapa extends Fragment implements OnMapReadyCallback {
         } catch (Exception e) {
             Toast.makeText(getContext(), "Error inesperado: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void cargarInformacionVisita() {
+        // Recuperamos el documento de la visita usando el ID
+        db.collection("visitas").document(idDocumentoVisita)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String idVisitante = documentSnapshot.getString("idVisitante");
+                        String fechaEntrada = documentSnapshot.getString("fechaHoraEntrada");
+                        String motivo = documentSnapshot.getString("motivo");
+
+                        // Buscar al usuario correspondiente al idVisitante
+                        if (idVisitante != null) {
+                            db.collection("usuarios").document(idVisitante)
+                                    .get()
+                                    .addOnSuccessListener(userSnapshot -> {
+                                        if (userSnapshot.exists()) {
+                                            String nombreVisitante = userSnapshot.getString("nombre");
+                                            String apellidoVisitante = userSnapshot.getString("apellido");
+
+                                            // Imprimir la información en el TextView
+                                            String informacion = "Visitante: " + nombreVisitante + " " + apellidoVisitante +
+                                                    "\nFecha de Entrada: " + fechaEntrada +
+                                                    "\nMotivo: " + motivo;
+                                            txtInformacion.setText(informacion);
+                                        } else {
+                                            txtInformacion.setText("No se encontró el visitante.");
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> txtInformacion.setText("Error al cargar el visitante"));
+                        } else {
+                            txtInformacion.setText("ID de visitante no encontrado.");
+                        }
+                    } else {
+                        txtInformacion.setText("No se encontró la visita.");
+                    }
+                })
+                .addOnFailureListener(e -> txtInformacion.setText("Error al cargar la visita"));
     }
 
     @Override

@@ -22,8 +22,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout6"
-        android:layout_width="297dp"
-        android:layout_height="157dp"
+        android:layout_width="376dp"
+        android:layout_height="150dp"
         android:background="@drawable/contenedor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,12 +32,27 @@
         app:layout_constraintVertical_bias="0.027">
 
         <TextView
+            android:id="@+id/txtInformacion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:gravity="center"
+            android:text="Informacion"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/txtPrueba"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Selecciona Visitante a Monitorear"
+            android:text="Visitante a Monitorear"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold"
