@@ -57,7 +57,7 @@ public class MonitorearVisitantes extends Fragment implements VisitaAdapter.OnVi
     public void onResume() {
         super.onResume();
         if (getActivity() instanceof AppCompatActivity) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Monitorear Visitante");
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.MonitorearVisitante));
         }
     }
 
@@ -143,51 +143,93 @@ public class MonitorearVisitantes extends Fragment implements VisitaAdapter.OnVi
 
         btnRegistrarSalida.setOnClickListener(v -> {
             if (idDocumentoSeleccionado != null && !idDocumentoSeleccionado.isEmpty()) {
+                // Obtener los datos de la visita seleccionada
                 db.collection("visitas")
                         .document(idDocumentoSeleccionado)
                         .get()
                         .addOnSuccessListener(documentSnapshot -> {
                             if (documentSnapshot.exists()) {
-                                // Registrar salida y mover al historial
-                                String fechaHoraSalida = obtenerHoraActual();
+                                // Obtener los datos del documento
+                                String idResidente = documentSnapshot.getString("idResidente");
+                                String idVisitante = documentSnapshot.getString("idVisitante");
+                                String idPortero = documentSnapshot.getString("idPortero");
+                                String motivo = documentSnapshot.getString("motivo");
+                                String fechaHoraEntrada = documentSnapshot.getString("fechaHoraEntrada");
 
-                                HashMap<String, Object> historialData = new HashMap<>();
-                                historialData.put("fechaHoraSalida", fechaHoraSalida);
+                                // Registrar la hora de salida actual
+                                String fechaHoraSalida = obtenerHoraActual(); // Función para obtener la hora actual
 
-                                db.collection("historialVisitas")
-                                        .add(historialData)
-                                        .addOnSuccessListener(aVoid -> {
-                                            db.collection("visitas")
-                                                    .document(idDocumentoSeleccionado)
-                                                    .delete()
-                                                    .addOnSuccessListener(aVoid1 -> {
-                                                        Toast.makeText(getContext(), "Salida registrada.", Toast.LENGTH_SHORT).show();
+                                // Consultar la información del portero para obtener el idFraccionamiento
+                                db.collection("fraccionamientos")  // Buscar en 'fraccionamientos' usando idPortero
+                                        .get()
+                                        .addOnSuccessListener(fraccionamientos -> {
+                                            String idFraccionamiento = null;
 
-                                                        // Actualizar el RecyclerView directamente
-                                                        for (int i = 0; i < visitaList.size(); i++) {
-                                                            if (visitaList.get(i).getIdDocumento().equals(idDocumentoSeleccionado)) {
-                                                                visitaList.remove(i);
-                                                                visitaAdapter.notifyItemRemoved(i);
-                                                                break;
-                                                            }
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(e -> {
-                                                        Toast.makeText(getContext(), "Error al eliminar la visita: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    });
+                                            for (QueryDocumentSnapshot fraccionamiento : fraccionamientos) {
+                                                List<String> porteros = (List<String>) fraccionamiento.get("porteros");
+                                                if (porteros != null && porteros.contains(idPortero)) {
+                                                    idFraccionamiento = fraccionamiento.getId();
+                                                    break; // Salir del bucle al encontrar el fraccionamiento
+                                                }
+                                            }
+
+                                            if (idFraccionamiento != null) {
+                                                // Crear un mapa con los datos
+                                                HashMap<String, Object> historialData = new HashMap<>();
+                                                historialData.put("idResidente", idResidente);
+                                                historialData.put("idVisitante", idVisitante);
+                                                historialData.put("idPortero", idPortero);
+                                                historialData.put("motivo", motivo);
+                                                historialData.put("fechaHoraEntrada", fechaHoraEntrada);
+                                                historialData.put("fechaHoraSalida", fechaHoraSalida);
+                                                historialData.put("idFraccionamiento", idFraccionamiento); // Agregar idFraccionamiento
+
+                                                // Guardar los datos en la colección 'historialVisitas'
+                                                db.collection("historialVisitas")
+                                                        .add(historialData)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            // Eliminar el documento original de la colección 'visitas'
+                                                            db.collection("visitas")
+                                                                    .document(idDocumentoSeleccionado)
+                                                                    .delete()
+                                                                    .addOnSuccessListener(aVoid1 -> {
+                                                                        Toast.makeText(getContext(), "Salida registrada y visita movida al historial.", Toast.LENGTH_SHORT).show();
+
+                                                                        // Eliminar la visita de la lista directamente
+                                                                        for (int i = 0; i < visitaList.size(); i++) {
+                                                                            if (visitaList.get(i).getIdDocumento().equals(idDocumentoSeleccionado)) {
+                                                                                visitaList.remove(i);
+                                                                                visitaAdapter.notifyItemRemoved(i); // Notificar el cambio en el RecyclerView
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                    .addOnFailureListener(e -> {
+                                                                        Toast.makeText(getContext(), "Error al eliminar la visita: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                    });
+                                                        })
+                                                        .addOnFailureListener(e -> {
+                                                            Toast.makeText(getContext(), "Error al guardar en el historial: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        });
+                                            } else {
+                                                Toast.makeText(getContext(), "No se encontró el fraccionamiento para este portero.", Toast.LENGTH_SHORT).show();
+                                            }
                                         })
                                         .addOnFailureListener(e -> {
-                                            Toast.makeText(getContext(), "Error al guardar en el historial: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "Error al obtener los fraccionamientos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                         });
+                            } else {
+                                Toast.makeText(getContext(), "Documento no encontrado.", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnFailureListener(e -> {
                             Toast.makeText(getContext(), "Error al obtener los datos de la visita: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
             } else {
-                Toast.makeText(getContext(), "Seleccione una visita.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Seleccione una visita para registrar la salida.", Toast.LENGTH_SHORT).show();
             }
         });
+
 
     }
 

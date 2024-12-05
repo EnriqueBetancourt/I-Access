@@ -62,6 +62,7 @@ public class MenuPrincipal extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
+            // Manejo de "Cerrar Sesión"
             if (id == R.id.nav_salir) { // Asegúrate de que este sea el ID del ítem "Cerrar Sesión"
                 FirebaseAuth.getInstance().signOut(); // Cerrar sesión de Firebase
 
@@ -73,11 +74,21 @@ public class MenuPrincipal extends AppCompatActivity {
                 return true;
             }
 
+            // Manejo de navegación
             boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
+
+            // Cerrar el drawer si se selecciona una opción válida
             if (handled) {
                 drawer.closeDrawer(GravityCompat.START);
             }
             return handled;
+        });
+
+        // Escucha para cerrar el drawer al cambiar el destino
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
         });
     }
 

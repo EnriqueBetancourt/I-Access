@@ -53,6 +53,7 @@
     <string name="Galería">Menu Portero</string>
     <string name="Presentación">Menu Residente</string>
     <string name="CerrarSesion">Cerrar Sesión</string>
+    <string name="monitorearMapa">Monitorear con Mapa</string>
     <string name="CodigoQR">Codigo QR</string>
     <string name="procesarVistaInfo">Accede al fraccionamiento escaneando el codigo</string>
     <string name="estasDeVisita">Estas de visita: </string>
@@ -67,6 +68,12 @@
     <string name="verHistorial">Ver Historial</string>
     <string name="abrirPuertaInfo2">Recuerde estar cerca de la puerta que desea abrir</string>
     <string name="abrirPuertaPrincipal">Puerta Principal</string>
+    <string name="visitanteMonitorear">Visitante a Monitorear</string>
+
+    <string name="IngresaCodigo">Ingresa el código del Fraccionamiento</string>
+    <string name="RegistrarResidente">Registrarse como Residente del Fraccionamiento</string>
+
+
 
 
     <string name="solicitarAccesoInfo1">Registrar Acceso como Residente</string>
@@ -77,6 +84,10 @@
     <string name="compartir">Compartir</string>
     <string name="cambiarIdioma">Ingles</string>
 
+    <string name="accederPortero">Acceder como Portero</string>
+    <string name="accederResidente">Acceder como Residente</string>
+    <string name="historialVisitante">Historial del Visitante</string>
+    <string name="historialResidente">Historial del Residente</string>
 
     //CheckBox
     <string name="cbContrasenia">Ver Contraseña</string>

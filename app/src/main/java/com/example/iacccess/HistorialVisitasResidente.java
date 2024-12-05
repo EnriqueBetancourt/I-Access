@@ -77,7 +77,7 @@ public class HistorialVisitasResidente extends Fragment {
     public void onResume() {
         super.onResume();
         if (getActivity() instanceof AppCompatActivity) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Historial");
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.historialResidente));
         }
     }
     @Override

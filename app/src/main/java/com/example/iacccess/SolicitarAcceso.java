@@ -50,7 +50,7 @@ public class SolicitarAcceso extends Fragment {
     public void onResume() {
         super.onResume();
         if (getActivity() instanceof AppCompatActivity) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Solicitar Acceso");
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.solicitarAcceso));
         }
     }
 

@@ -67,7 +67,7 @@ public class AbrirPuerta extends Fragment {
     public void onResume() {
         super.onResume();
         if (getActivity() instanceof AppCompatActivity) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Abrir Puerta");
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.abrirPuerta));
         }
     }
     @Override

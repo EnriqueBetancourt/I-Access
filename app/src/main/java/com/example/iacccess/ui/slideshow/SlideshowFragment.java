@@ -48,7 +48,7 @@ public class SlideshowFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (getActivity() instanceof AppCompatActivity) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Acceder como Residente");
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.accederResidente));
         }
     }
 

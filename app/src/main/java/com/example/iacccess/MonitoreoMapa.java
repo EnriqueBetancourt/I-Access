@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,6 +30,8 @@ public class MonitoreoMapa extends Fragment implements OnMapReadyCallback {
     private FirebaseFirestore db;    // Conexión a Firestore
     private Marker visitanteMarker;  // Marcador en el mapa
     private String idDocumentoVisita;  // ID del documento de la visita recibido
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -161,6 +164,9 @@ public class MonitoreoMapa extends Fragment implements OnMapReadyCallback {
     @Override
     public void onResume() {
         super.onResume();
+        if (getActivity() instanceof AppCompatActivity) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.monitorearMapa));
+        }
         if (mapView != null) {
             mapView.onResume();
         }

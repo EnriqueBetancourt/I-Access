@@ -59,7 +59,7 @@
         public void onResume() {
             super.onResume();
             if (getActivity() instanceof AppCompatActivity) {
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Procesar Visita");
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.btnProcesarVisita));
             }
         }
         @Override

@@ -58,7 +58,10 @@ public class MenuPortero extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getActivity() instanceof AppCompatActivity) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Menú Portero");
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            if (activity.getSupportActionBar() != null) {
+                activity.getSupportActionBar().setTitle(getString(R.string.Galería));
+            }
         }
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -81,7 +84,7 @@ public class MenuPortero extends Fragment {
     public void onResume() {
         super.onResume();
         if (getActivity() instanceof AppCompatActivity) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Menú Portero");
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.Galería));
         }
     }
 

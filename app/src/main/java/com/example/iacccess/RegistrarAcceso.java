@@ -62,7 +62,7 @@ public class RegistrarAcceso extends Fragment {
     public void onResume() {
         super.onResume();
         if (getActivity() instanceof AppCompatActivity) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Registrar Acceso");
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.RegistrarAcceso));
         }
     }
 
