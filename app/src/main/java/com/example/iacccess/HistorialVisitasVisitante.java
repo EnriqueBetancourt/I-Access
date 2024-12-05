@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +37,14 @@ public class HistorialVisitasVisitante extends Fragment {
                              Bundle savedInstanceState) {
         // Inflar el layout para este fragmento
         return inflater.inflate(R.layout.fragment_historial_visitas_visitante, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() instanceof AppCompatActivity) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Historial");
+        }
     }
 
     @Override

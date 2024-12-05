@@ -9,6 +9,7 @@
     tools:context=".AbrirPuerta">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:elevation="16dp"
         android:layout_width="320dp"
         android:layout_height="400dp"
         android:background="@drawable/contenedor"
@@ -63,6 +64,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:elevation="16dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">

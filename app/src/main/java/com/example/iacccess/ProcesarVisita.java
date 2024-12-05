@@ -10,6 +10,7 @@
 
     import androidx.annotation.NonNull;
     import androidx.annotation.Nullable;
+    import androidx.appcompat.app.AppCompatActivity;
     import androidx.fragment.app.Fragment;
 
     import com.bumptech.glide.Glide;
@@ -54,6 +55,13 @@
             }
         }
 
+        @Override
+        public void onResume() {
+            super.onResume();
+            if (getActivity() instanceof AppCompatActivity) {
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Procesar Visita");
+            }
+        }
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {

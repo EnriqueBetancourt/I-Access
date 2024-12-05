@@ -21,6 +21,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:elevation="16dp"
         android:id="@+id/constraintLayout6"
         android:layout_width="297dp"
         android:layout_height="157dp"
