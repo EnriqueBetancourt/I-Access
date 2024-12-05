@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
@@ -43,6 +44,14 @@ public class SolicitarAcceso extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_solicitar_acceso, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() instanceof AppCompatActivity) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Solicitar Acceso");
+        }
     }
 
     @Override

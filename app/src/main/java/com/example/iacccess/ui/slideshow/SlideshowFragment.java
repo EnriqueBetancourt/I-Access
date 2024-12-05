@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -42,6 +43,13 @@ public class SlideshowFragment extends Fragment {
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         return root;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() instanceof AppCompatActivity) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Acceder como Residente");
+        }
     }
 
     @Override

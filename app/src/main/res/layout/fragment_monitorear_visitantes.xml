@@ -11,6 +11,7 @@
     <!-- Contenedor principal -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="298dp"
+        android:elevation="16dp"
         android:layout_height="570dp"
         android:background="@drawable/contenedor"
         app:layout_constraintBottom_toBottomOf="parent"

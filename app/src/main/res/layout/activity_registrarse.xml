@@ -21,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:elevation="16dp"
         android:layout_width="320dp"
         android:layout_height="600dp"
         android:background="@drawable/contenedor"

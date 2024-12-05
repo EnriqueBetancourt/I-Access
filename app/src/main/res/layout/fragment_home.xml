@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#F4F1F1"
+    android:background="#E4E4E4"
     tools:context=".ui.home.HomeFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:elevation="16dp"
             android:id="@+id/constraintLayout"
             android:layout_width="296dp"
             android:layout_height="305dp"
@@ -27,24 +28,24 @@
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="21dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="152dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="116dp"
                 android:layout_marginBottom="17dp"
                 android:backgroundTint="@android:color/black"
                 android:text="@string/btnVerHistorial"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.142"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="195dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginEnd="87dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="80dp"
                 android:text="@string/VeTuHistorial"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -54,8 +55,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
-                android:layout_marginEnd="140dp"
-                android:layout_marginBottom="22dp"
+                android:layout_marginEnd="125dp"
+                android:layout_marginBottom="15dp"
                 android:backgroundTint="@android:color/black"
                 android:text="@string/btnProcesarVisita"
                 app:layout_constraintBottom_toTopOf="@+id/textView4"
@@ -67,7 +68,7 @@
                 android:layout_width="262dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="6dp"
-                android:layout_marginEnd="26dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
                 android:text="@string/procesarVistaInfo"
                 app:layout_constraintBottom_toTopOf="@+id/btnProcesarVista"
@@ -91,8 +92,8 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="128dp"
-                android:layout_marginBottom="28dp"
+                android:layout_marginEnd="115dp"
+                android:layout_marginBottom="8dp"
                 android:text="Historial de Visita"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView7"
@@ -100,8 +101,9 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="292dp"
+            android:id="@+id/constraintLayout2"
+            android:elevation="16dp"
+            android:layout_width="292dp"
         android:layout_height="177dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/contenedor"
@@ -112,20 +114,21 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
         app:layout_constraintVertical_bias="0.13">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="105dp"
-            android:layout_marginBottom="15dp"
-            android:text="@string/CompletarPerfil"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="120dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/CompletarPerfil"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
+            <TextView
             android:id="@+id/textView5"
             android:layout_width="239dp"
             android:layout_height="0dp"
@@ -135,20 +138,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/btnCompletarPerfil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="112dp"
-            android:text="@string/CompletarPerfil"
-            android:backgroundTint="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            <Button
+                android:id="@+id/btnCompletarPerfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="116dp"
+                android:backgroundTint="@android:color/black"
+                android:text="@string/CompletarPerfil"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:elevation="16dp"
         android:id="@+id/constraintLayout3"
         android:layout_width="292dp"
         android:layout_height="177dp"

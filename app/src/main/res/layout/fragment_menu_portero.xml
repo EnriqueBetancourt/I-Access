@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F1F1"
+    android:background="#E4E4E4"
     tools:context=".MenuPortero">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
+        android:elevation="16dp"
         android:layout_width="292dp"
         android:layout_height="177dp"
         android:layout_marginTop="16dp"
@@ -49,6 +50,7 @@
     <!-- Registro de accesos -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
+        android:elevation="16dp"
         android:layout_width="292dp"
         android:layout_height="177dp"
         android:layout_marginTop="16dp"
@@ -96,8 +98,9 @@
     <!-- Monitorear visitante -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
+        android:elevation="16dp"
         android:layout_width="298dp"
-        android:layout_height="290dp"
+        android:layout_height="200dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/contenedor"
         app:layout_constraintEnd_toEndOf="parent"

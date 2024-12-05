@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -39,7 +40,13 @@ public class GalleryFragment extends Fragment {
         View root = binding.getRoot();
         return root;
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() instanceof AppCompatActivity) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Acceder como Vigilante");
+        }
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

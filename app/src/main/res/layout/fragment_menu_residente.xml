@@ -15,6 +15,7 @@
         <!-- Contenedor de perfil -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contenedorPerfil"
+            android:elevation="16dp"
             android:layout_width="292dp"
             android:layout_height="177dp"
             android:layout_marginTop="16dp"
@@ -53,6 +54,7 @@
     <!-- Contenedor de acceso -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contenedorAcceso"
+        android:elevation="16dp"
         android:layout_width="292dp"
         android:layout_height="177dp"
         android:layout_marginTop="16dp"
@@ -99,6 +101,7 @@
     <!-- Contenedor de monitoreo -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contenedorMonitoreo"
+        android:elevation="16dp"
         android:layout_width="298dp"
         android:layout_height="290dp"
         android:layout_marginTop="16dp"

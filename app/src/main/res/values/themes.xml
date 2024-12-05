@@ -1,8 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.IAcccess" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
+        <!-- Personaliza tu tema claro aquí -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!-- Color de la barra de estado (Status Bar) -->
+        <item name="android:statusBarColor">#181A30</item> <!-- o cualquier color que prefieras -->
+        <!-- Para texto claro en la barra de estado -->
+        <item name="android:windowLightStatusBar">false</item> <!-- Coloca 'true' si prefieres texto oscuro -->
+
     </style>
 
     <style name="Theme.IAcccess" parent="Base.Theme.IAcccess" />
@@ -13,6 +19,5 @@
     </style>
 
     <style name="Theme.IAcccess.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="Theme.IAcccess.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

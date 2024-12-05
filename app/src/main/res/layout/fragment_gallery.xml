@@ -11,6 +11,7 @@
     <!-- Contenedor principal para la tarjeta -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="320dp"
+        android:elevation="16dp"
         android:layout_height="400dp"
         android:background="@drawable/contenedor"
         app:layout_constraintTop_toTopOf="parent"

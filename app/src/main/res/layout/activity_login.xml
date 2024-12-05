@@ -35,6 +35,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
+        android:elevation="16dp"
         android:layout_width="292dp"
         android:layout_height="470dp"
         android:background="@drawable/contenedor"
